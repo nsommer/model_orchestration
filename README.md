@@ -1,4 +1,4 @@
-# Model Orchestration - orchestrating actions on related models
+# Model Orchestration - orchestrating actions on related models [![Build Status](https://travis-ci.org/nsommer/model_orchestration.svg?branch=master)](https://travis-ci.org/nsommer/model_orchestration)
 
 `ModelOrchestration` is a toolkit to help with orchestrating handling of multiple models that are related to each other.
 
@@ -8,7 +8,7 @@ The basic idea is to create a new model in which you can nest other models. You 
 
 Consider you're developing a B2B SaaS application with a signup form. When a new client signs up, you will probably need to create multiple models and save them to the database, for example a user object, representing the person signing up and an organization object which attaches the user to a legal entity which represents your customer, billing data etc.
 
-+ModelOrchestration+ allows you to nest the user model and the organization model into a meta model, on which all the actions necessary can be performed (validation, persistence). Let's call this "meta model" simply `Signup`.
+`ModelOrchestration` allows you to nest the user model and the organization model into a meta model, on which all the actions necessary can be performed (validation, persistence). Let's call this "meta model" simply `Signup`.
 
 ```ruby
 class User < ActiveRecord::Base
