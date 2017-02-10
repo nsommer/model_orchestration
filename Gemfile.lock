@@ -1,15 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (5.0.0.1)
-      activesupport (= 5.0.0.1)
-    activesupport (5.0.0.1)
+    activemodel (5.0.1)
+      activesupport (= 5.0.1)
+    activesupport (5.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    concurrent-ruby (1.0.2)
-    i18n (0.7.0)
+    concurrent-ruby (1.0.4)
+    i18n (0.8.0)
     minitest (5.10.1)
     rake (12.0.0)
     thread_safe (0.3.5)
@@ -21,7 +21,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemodel
-  activesupport
+  activesupport (>= 5.0.1)
   minitest
   rake
 

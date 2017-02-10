@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   s.files        = Dir["MIT-LICENSE", "README.md", "lib/**/*"]
   s.require_path = "lib"
 
-  s.add_runtime_dependency "activesupport", '~> 5'
+  s.add_runtime_dependency "activesupport", '>= 5.0.1'
 end
