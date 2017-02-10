@@ -11,16 +11,16 @@ module ModelOrchestration
     extend ActiveSupport::Concern
     
     included do
-      class_attribute :nested_models, :dependencies
-      self.nested_models = []
-      self.dependencies  = {}
+      class_attribute :_nested_models, :_dependencies
+      self._nested_models = []
+      self._dependencies  = {}
     end
   
     module ClassMethods
       ##
       # Class method to declare a nested model. This invokes instantiation
-      # of the model when the holding model is instantiated. The nested model
-      # can be declared by symbol, type or string.
+      # of the model when the orchestration model is instantiated.
+      # The nested model can be declared by symbol, type or string.
       #
       #   class HoldingClass
       #     include ModelOrchestration::Base
@@ -30,7 +30,23 @@ module ModelOrchestration
       def nested_model(model)
         model_key = symbolize(model)
       
-        self.nested_models << model_key
+        self._nested_models << model_key
+      end
+      
+      ##
+      # Class method to declare nested models. This invokes instantiation
+      # of the models when the orchestration model is instantiated.
+      # The nested model can be declared by symbol, type or string.
+      #
+      #   class HoldingClass
+      #     include ModelOrchestration::Base
+      #   
+      #     nested_models :user, :company
+      #   end
+      def nested_models(*models)
+        models.each do |model|
+          nested_model model
+        end
       end
   
       ##
@@ -61,7 +77,7 @@ module ModelOrchestration
           raise ModelOrchestration::DependencyCycleError, "#{from} is already a dependency of #{to}"
         end
     
-        self.dependencies[from] = to
+        self._dependencies[from] = to
       end
     
       private
@@ -79,7 +95,7 @@ module ModelOrchestration
         end
         
         def dependency_introduces_cycle?(from, to)
-          self.dependencies.include?(to) && (self.dependencies[to] == from)
+          self._dependencies.include?(to) && (self._dependencies[to] == from)
         end
     end
     
@@ -89,7 +105,7 @@ module ModelOrchestration
     def initialize(attrs = {})
       @nested_model_instances = {}
     
-      self.nested_models.each do |model|
+      self._nested_models.each do |model|
         klass = model.to_s.classify.constantize
       
         if attrs.include?(model)
@@ -99,7 +115,7 @@ module ModelOrchestration
         end
       end
     
-      self.dependencies.each do |from, to|
+      self._dependencies.each do |from, to|
         @nested_model_instances[from].public_send("#{to.to_s}=", @nested_model_instances[to])
       end
     end

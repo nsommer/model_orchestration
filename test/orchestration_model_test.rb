@@ -6,8 +6,7 @@ class B; end
 class OrchestrationWithCycle
   include ModelOrchestration::Base
   
-  nested_model :a
-  nested_model :b
+  nested_models :a, :b
 end
 
 # This test uses an orchestration model +UserOrgModel+ which has a nested
