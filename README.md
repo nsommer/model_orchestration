@@ -52,7 +52,7 @@ gem install model_orchestration
 
 The source code can be downloaded on GitHub
 
-* https://github.com/nsommer/orchestration_model
+* https://github.com/nsommer/model_orchestration
 
 ## Development & Contributions
 
