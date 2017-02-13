@@ -21,8 +21,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel
-  activesupport (>= 5.0.1)
+  activemodel (~> 5.0, >= 5.0.1)
+  activesupport (~> 5.0, >= 5.0.1)
   minitest
   rake
   rdoc
