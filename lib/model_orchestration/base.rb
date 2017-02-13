@@ -71,13 +71,15 @@ module ModelOrchestration
         end
         
         from = symbolize(args[:from])
-        to   = symbolize(args[:to])
-        
-        if dependency_introduces_cycle?(from, to)
-          raise ModelOrchestration::DependencyCycleError, "#{from} is already a dependency of #{to}"
+        tos  = args[:to].is_a?(Array) ? args[:to] : [symbolize(args[:to])]
+                
+        tos.each do |to|
+          if dependency_introduces_cycle?(from, to)
+            raise ModelOrchestration::DependencyCycleError, "#{from} is already a dependency of #{to}"
+          else
+            add_dependency(from, to)
+          end
         end
-    
-        self._dependencies[from] = to
       end
     
       private
@@ -94,8 +96,20 @@ module ModelOrchestration
           end
         end
         
+        def add_dependency(from, to)
+          self._dependencies[from] ||= Array.new
+          
+          unless has_dependency?(from, to)
+            self._dependencies[from] << to
+          end
+        end
+        
+        def has_dependency?(from, to)
+          self._dependencies.include?(from) && self._dependencies[from].include?(to)
+        end
+        
         def dependency_introduces_cycle?(from, to)
-          self._dependencies.include?(to) && (self._dependencies[to] == from)
+          has_dependency?(to, from)
         end
     end
     
@@ -115,8 +129,10 @@ module ModelOrchestration
         end
       end
     
-      self._dependencies.each do |from, to|
-        @nested_model_instances[from].public_send("#{to.to_s}=", @nested_model_instances[to])
+      self._dependencies.each do |from, tos|
+        tos.each do |to|
+          @nested_model_instances[from].public_send("#{to.to_s}=", @nested_model_instances[to])
+        end
       end
     end
   

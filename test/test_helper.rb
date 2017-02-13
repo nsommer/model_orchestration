@@ -26,5 +26,5 @@ class UserOrgModel
 
   nested_model :user
   nested_model :org
-  nested_model_dependency from: :user, to: :org
+  nested_model_dependency from: :user, to: [:org]
 end
