@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email    = "mail@nilssommer.de"
   s.homepage = "https://github.com/nsommer/model_orchestration"
 
-  s.files        = Dir["MIT-LICENSE", "README.md", "lib/**/*"]
+  s.files        = Dir["MIT-LICENSE", "README.md", "CHANGELOG.md", "lib/**/*"]
   s.require_path = "lib"
 
   s.add_runtime_dependency "activesupport", '>= 5.0.1'

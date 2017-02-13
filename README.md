@@ -42,9 +42,6 @@ signup[:user][:email] # => "nils@example.org"
 signup.save # => true
 ```
 
-`ModelOrchestration::Persistence` only needs to be included if you need
-`save` and `create` method variations. Leaving it you can still use `ModelOrchestration::Base` alone with `ActiveModel` models.
-
 ## Download and installation
 
 The latest version of Orchestration Model can be installed with RubyGems:
