@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'model_orchestration/version'
 
 ##
 # +ModelOrchestration+ is a toolkit to help with orchestrating handling
