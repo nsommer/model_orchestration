@@ -28,4 +28,17 @@ class UserOrgModelTest < Minitest::Test
     @user_org_model.org.name = nil
     assert !@user_org_model.valid?
   end
+  
+  def test_passing_nested_models_as_instances_to_orchestration_model
+    user = User.new(name: "Nils", age: 22)
+    org  = Org.new(name: "Nils' Webdesign Agency")
+    @user_org_model = UserOrgModel.new(user: user, org: org)
+    assert @user_org_model.valid?
+  end
+  
+  def test_only_hashes_or_correctly_typed_instances_may_be_passed_to_orchestration_model
+    assert_raises TypeError do
+      @user_org_model = UserOrgModel.new(user: "String instead of User class", org: "String instead of Org class")
+    end
+  end
 end
