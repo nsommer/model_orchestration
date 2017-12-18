@@ -120,12 +120,12 @@ module ModelOrchestration
       @nested_model_instances = {}
     
       self._nested_models.each do |model|
-        klass = model.to_s.classify.constantize
+        model_class = model.to_s.classify.constantize
       
         if attrs.include?(model)
-          @nested_model_instances[model] = klass.new(attrs[model])
+          @nested_model_instances[model] = initialize_nested_model(model_class, attrs[model])
         else
-          @nested_model_instances[model] = klass.new
+          @nested_model_instances[model] = initialize_nested_model(model_class)
         end
       end
     
@@ -228,6 +228,16 @@ module ModelOrchestration
     
       def raise_validation_error
         raise(ValidationError.new(self))
+      end
+      
+      def initialize_nested_model(model_class, hash_or_instance = {})
+        if hash_or_instance.is_a? Hash
+          model_class.new(hash_or_instance)
+        elsif hash_or_instance.is_a? model_class
+          hash_or_instance
+        else
+          raise(TypeError, "hash_or_instance must be of type #{model_class.to_s}")
+        end
       end
   end
 end
