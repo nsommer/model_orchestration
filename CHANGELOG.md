@@ -1,5 +1,11 @@
 ## 0.2.0 (Not released yet)
 
+* Added the ability to pass instances of nested models to an orchestration model constructor in addition to argument hashes.
+  
+  See: https://github.com/nsommer/model_orchestration/issues/3
+  
+  If a nested model has already been instantiated you can pass it directly to the orchestration model constructor.
+
 * Added `nested_models` class method to `ModelOrchestration::Base`.
 
   See: https://github.com/nsommer/model_orchestration/issues/1
