@@ -10,7 +10,7 @@ end
 
 RDoc::Task.new do |rdoc|
   rdoc.title = "ModelOrchestration documentation"
-  rdoc.main = "README.rdoc"
-  rdoc.rdoc_files.include("README.rdoc", "lib/**/*.rb")
+  rdoc.main = "README.md"
+  rdoc.rdoc_files.include("README.md", "lib/**/*.rb")
   rdoc.rdoc_dir = "docs"
 end
