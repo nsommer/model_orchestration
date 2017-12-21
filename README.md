@@ -1,4 +1,5 @@
 # Model Orchestration - orchestrating actions on related models ![Build Status](https://travis-ci.org/nsommer/model_orchestration.svg?branch=master)
+Links: [GitHub](https://github.com/nsommer/model_orchestration) | [Travis CI](https://travis-ci.org/nsommer/model_orchestration) | [RubyGems](https://rubygems.org/gems/model_orchestration) | [RDocs](https://nsommer.github.io/model_orchestration/)
 
 *ModelOrchestration* is a toolkit to help with orchestrating handling of multiple models that are related to each other.
 
